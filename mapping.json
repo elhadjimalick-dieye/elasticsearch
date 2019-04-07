@@ -53,9 +53,6 @@
       "_source": {
         "enabled": true
       },
-      "_all": {
-        "enabled": true
-      },
       "properties": {
         "organizer": {
           "type": "text",
