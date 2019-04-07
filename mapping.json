@@ -58,9 +58,13 @@
       },
       "properties": {
         "organizer": {
-          "type": "text"
+          "type": "text",
+          "copy_to": "full_name"
         },
         "name": {
+          "type": "text"
+        },
+        "full_name": {
           "type": "text"
         },
         "description": {
