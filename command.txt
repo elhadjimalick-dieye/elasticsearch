@@ -1,0 +1,4 @@
+
+curl -XPUT 'localhost:9200/get-together/group/1?pretty' -H 'Content-Type: application/json' -d '{"name": "Elasticsearch Denver", "organizer": "Lee"}'
+http://localhost:9200/get-together?pretty ou curl -GET 'http://localhost:9200/get-together?pretty'
+http://localhost:9200/get-together/_mapping/group?pretty mapping spécifique
