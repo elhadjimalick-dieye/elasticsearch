@@ -49,7 +49,7 @@
     }
   },
   "mappings": {
-    "_docs": {
+    "_doc": {
       "_source": {
         "enabled": true
       },
