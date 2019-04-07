@@ -77,7 +77,7 @@
           "fields": {
             "verbatim": {
               "type": "text",
-              "index": "not_analyzed"
+              "index": false
             }
           }
         },
