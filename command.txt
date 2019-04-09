@@ -2,3 +2,36 @@
 curl -XPUT 'localhost:9200/get-together/group/1?pretty' -H 'Content-Type: application/json' -d '{"name": "Elasticsearch Denver", "organizer": "Lee"}'
 http://localhost:9200/get-together?pretty ou curl -GET 'http://localhost:9200/get-together?pretty'
 http://localhost:9200/get-together/_mapping/group?pretty mapping spécifique
+
+Recherche
+http://localhost:9200/get-together/_doc/_search?q=elasticsearch&pretty ou curl -XGET 'http://localhost:9200/get-together/_doc/_search?q=elasticsearch&pretty' 
+
+Multiple index recherche
+http://localhost:9200/get-together,other-index/_doc/_search?q=elasticsearch&pretty ou curl -XGET 'http://localhost:9200/get-together,other-index/_doc/_search?q=elasticsearch&pretty'
+
+with ignore_unavailable flag
+http://localhost:9200/get-together,other-index/_doc/_search?q=elasticsearch&ignore_unavailable=true&pretty ou curl -XGET 'http://localhost:9200/get-together,other-index/_doc/_search?q=elasticsearch&ignore_unavailable=true&pretty'
+
+Recherche avec body
+curl -XPOST 'localhost:9200/get-together/_doc/_search?pretty' -H 'Content-Type: application/json' -d '{"query": {"query_string":{"query":"elasticsearch"}}}'
+
+Recherche avec body et default field operator: default name, default operator
+curl -XPOST 'localhost:9200/get-together/_doc/_search?pretty' -H 'Content-Type: application/json' -d '{"query": {"query_string":{"query":"elasticsearch san francisco", "default_field":"name", "default_operator":"AND"}}}'
+
+Recherche avec la query term
+curl -XPOST 'localhost:9200/get-together/_doc/_search?pretty' -H 'Content-Type: application/json' -d '{"query": {"term":{"name":"elasticsearch"}}}'
+
+Recherche avec body et filtre
+curl -XPOST 'localhost:9200/get-together/_doc/_search?pretty' -H 'Content-Type: application/json' -d '{"query":{"bool":{"filter":{"term":{"name":"elasticsearch"}}}}}'
+
+Recherche aggrégation
+curl -XPOST 'localhost:9200/get-together/_doc/_search?pretty' -H 'Content-Type: application/json' -d '{"aggregations":{"organizers":{"terms":{"field":"organizer"}}}}'
+
+curl -XPUT 'localhost:9200/get-together/_mapping/_doc?pretty' -H 'Content-Type: application/json' -d '{
+  "properties": {
+    "organizer": { 
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}'
