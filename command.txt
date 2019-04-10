@@ -38,3 +38,6 @@ curl -XPUT 'localhost:9200/get-together/_mapping/_doc?pretty' -H 'Content-Type: 
     }
   }
 }'
+
+Recuperer un document avec son ID
+http://localhost:9200/get-together/_doc/1?pretty ou curl -GET 'http://localhost:9200/get-together/_doc/1?pretty'
