@@ -12,6 +12,9 @@ http://localhost:9200/get-together,other-index/_doc/_search?q=elasticsearch&pret
 with ignore_unavailable flag
 http://localhost:9200/get-together,other-index/_doc/_search?q=elasticsearch&ignore_unavailable=true&pretty ou curl -XGET 'http://localhost:9200/get-together,other-index/_doc/_search?q=elasticsearch&ignore_unavailable=true&pretty'
 
+Recherche dans tous les index
+http://localhost:9200/_search?q=elasticsearch&pretty ou curl -XGET 'http://localhost:9200/_search?q=elasticsearch&pretty'
+
 Recherche avec body
 curl -XPOST 'localhost:9200/get-together/_doc/_search?pretty' -H 'Content-Type: application/json' -d '{"query": {"query_string":{"query":"elasticsearch"}}}'
 
