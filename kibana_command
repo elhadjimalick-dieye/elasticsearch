@@ -1,0 +1,70 @@
+GET _search
+
+GET _cat/indices?pretty
+
+GET get-together,other-index/_doc/_search?q=elasticsearch&pretty
+
+GET get-together,other-index/_doc/_search?q=elasticsearch&ignore_unavailable=true&pretty
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "query_string": {
+      "query": "elasticsearch"
+    }
+  }
+}
+
+POST get-together/_doc/_search?pretty
+{
+  "query": {
+    "query_string": {
+      "query": "elasticsearch san francisco",
+      "default_field": "name",
+      "default_operator": "AND"
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "term": {
+      "name": "elasticsearch"
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "term": {
+          "name": "elasticsearch"
+        }
+      }
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "aggregations": {
+    "organizers": {
+      "terms": {
+        "field": "organizer"
+      }
+    }
+  }
+}
+
+POST get-together/_mapping/_doc
+{
+  "properties": {
+    "organizer": {
+      "type": "text",
+      "fielddata": true
+    }
+  }
+}
