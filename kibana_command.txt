@@ -2,6 +2,8 @@ GET _search
 
 GET _cat/indices?pretty
 
+GET .kibana_1/_search?pretty
+
 GET get-together,other-index/_doc/_search?q=elasticsearch&pretty
 
 GET get-together,other-index/_doc/_search?q=elasticsearch&ignore_unavailable=true&pretty
