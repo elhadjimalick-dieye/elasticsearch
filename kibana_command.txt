@@ -1,5 +1,7 @@
 GET _search
 
+GET _cluster/health
+
 GET /_cluster/allocation/explain
 {
   "index": "get-together",
