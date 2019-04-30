@@ -19,6 +19,21 @@ PUT _cluster/settings
   }
 }
 
+PUT /get-together/_doc/1
+{
+  "name": "Late Night with Elasticsearch",
+  "date": "2013-10-25T19:00"
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "query_string": {
+      "query": "late"
+    }
+  }
+}
+
 GET /_cat/allocation?v
 
 GET /_cluster/settings?pretty
