@@ -86,6 +86,17 @@ POST get-together/_doc/_search
   }
 }
 
+GET get-together/_mapping/_doc
+
+POST get-together/_mapping/_doc
+{
+  "properties": {
+    "owner": {
+      "type": "keyword"
+    }
+  }
+}
+
 POST get-together/_mapping/_doc
 {
   "properties": {
