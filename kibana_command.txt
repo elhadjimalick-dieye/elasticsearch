@@ -22,7 +22,8 @@ PUT _cluster/settings
 PUT /get-together/_doc/1
 {
   "name": "Late Night with Elasticsearch",
-  "date": "2013-10-25T19:00"
+  "date": "2013-10-25T19:00",
+  "size":32768
 }
 
 POST get-together/_doc/_search
@@ -30,6 +31,16 @@ POST get-together/_doc/_search
   "query": {
     "query_string": {
       "query": "late"
+    }
+  }
+}
+
+POST get-together/_mapping/_doc
+{
+  "properties": {
+    "name": {
+      "type": "text",
+      "index":true
     }
   }
 }
@@ -118,6 +129,9 @@ POST get-together/_mapping/_doc
     "organizer": {
       "type": "text",
       "fielddata": true
+    },
+    "size": {
+      "type": "short"
     }
   }
 }
