@@ -23,7 +23,37 @@ PUT /get-together/_doc/1
 {
   "name": "Late Night with Elasticsearch",
   "date": "2013-10-25T19:00",
-  "size":32768
+  "price":32768
+}
+
+POST /get-together/_doc/1/_update
+{
+  "doc":{
+    "price":6969
+  }
+}
+
+POST /get-together/_doc/1/_update
+{
+   "script" : {
+        "source": "ctx._source.price += params.price_diff",
+        "params" : {
+            "price_diff" : 10
+        }
+    }
+}
+
+
+POST /get-together/_doc/50/_update
+{
+  "doc": {
+    "price": 6969
+  },
+  "upsert": {
+    "name": "Late Night with Elasticsearch",
+    "date": "2013-10-25T19:00",
+    "price": 6969
+  }
 }
 
 POST get-together/_doc/_search
