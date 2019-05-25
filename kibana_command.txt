@@ -23,13 +23,35 @@ PUT /get-together/_doc/1
 {
   "name": "Late Night with Elasticsearch",
   "date": "2013-10-25T19:00",
-  "price":32768
+  "price":30000
 }
 
-POST /get-together/_doc/1/_update
+DELETE /get-together/_doc/1
+
+DELETE /get-together
+
+POST /get-together/_close
+
+POST /get-together/_delete_by_query
+{
+  "query": {
+    "query_string": {
+      "query": "late"
+    }
+  }
+}
+
+POST /get-together/_doc/_delete_by_query
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+POST /get-together/_doc/1/_update?retry_on_conflict=3
 {
   "doc":{
-    "price":6969
+    "price":20000
   }
 }
 
@@ -38,7 +60,7 @@ POST /get-together/_doc/1/_update
    "script" : {
         "source": "ctx._source.price += params.price_diff",
         "params" : {
-            "price_diff" : 10
+            "price_diff" : 40000
         }
     }
 }
@@ -47,12 +69,12 @@ POST /get-together/_doc/1/_update
 POST /get-together/_doc/50/_update
 {
   "doc": {
-    "price": 6969
+    "price": 30000
   },
   "upsert": {
     "name": "Late Night with Elasticsearch",
     "date": "2013-10-25T19:00",
-    "price": 6969
+    "price": 30000
   }
 }
 
