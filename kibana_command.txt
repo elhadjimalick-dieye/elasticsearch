@@ -194,3 +194,77 @@ PUT /_cluster/settings
     "cluster.routing.allocation.enable": "all"
   }
 }
+
+GET /get-together/_search?from=10&size=10
+
+GET /get-together/_search?sort=date:asc
+
+GET /get-together/_search?sort=date:desc
+
+GET /get-together/_search?sort=date:asc&_source=title,date
+
+GET /get-together/_search?sort=date:asc&q=title:elasticsearch
+
+POST get-together/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "from": 10,
+  "size": 10
+}
+
+POST get-together/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": ["name","date"]
+}
+
+POST get-together/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": {
+    "includes": ["location*","date"]
+  }
+}
+
+POST get-together/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": {
+    "includes": ["location*","date"],
+    "excludes": ["location_event.geolocation"]
+  }
+}
+
+POST get-together/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "created_on":  "asc"
+    },
+    {
+      "name": "desc"
+    },
+    "_score"
+  ]
+}
+
+POST get-together/_mapping/_doc
+{
+  "properties": {
+    "name": {
+      "type": "text",
+      "fielddata": true
+    }
+  }
+}
