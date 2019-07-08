@@ -268,3 +268,95 @@ POST get-together/_mapping/_doc
     }
   }
 }
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "match": {
+      "title": "Hadoop"
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "filtered": {
+      "match": {
+        "title": "hadoop"
+      }
+    },
+    "filter": {
+      "term": {
+        "host": "andy"
+      }
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match": {
+          "title": "hadoop"
+        }
+      },
+      "filter": {
+        "term": {
+          "host": "andy"
+        }
+      }
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "query_string": {
+      "query": "nosql"
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "query_string": {
+      "query": "nosql",
+      "default_field":"description"
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "query_string": {
+      "query": "description:nosql"
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "query_string": {
+      "query": "description:nosql AND name:boulder"
+    }
+  }
+}
+
+POST get-together/_doc/_search
+{
+  "query": {
+    "query_string": {
+      "query": "nosql",
+      "fields":["description","location_event.name"]
+    }
+  }
+}
+
+
